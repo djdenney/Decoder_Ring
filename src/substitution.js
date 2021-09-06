@@ -4,51 +4,57 @@ const substitutionModule = (function () {
     // alphabet, with the ability to encode or decode
     function substitution(input, alphabet, encode = true) {
         if (!alphabet) {
-            return false
+            return false;
         }
-        const alphaCharacters = 'abcdefghijklmnopqrstuvwxyz'.split('')
-        const inputAlphaCharacters = alphabet.split('')
+        const alphaCharacters = "abcdefghijklmnopqrstuvwxyz".split("");
+        const inputAlphaCharacters = alphabet.split("");
         if (
-            alphabet.length != 26 || 
-            inputAlphaCharacters.filter((character, index) => inputAlphaCharacters.indexOf(character) != index).length > 0
+            alphabet.length != 26 ||
+            inputAlphaCharacters.filter(
+                (character, index) =>
+                    inputAlphaCharacters.indexOf(character) != index
+            ).length > 0
         ) {
-            return false
+            return false;
         }
-        const inputCharacters = input.toLowerCase().split('')
-        let cypher = {}
-        let outputCharacters = []
-        alphaCharacters.forEach((alphaCharacter, i) => cypher[alphaCharacter] = inputAlphaCharacters[i])
+        const inputCharacters = input.toLowerCase().split("");
+        let cypher = {};
+        let outputCharacters = [];
+        alphaCharacters.forEach(
+            (alphaCharacter, i) =>
+                (cypher[alphaCharacter] = inputAlphaCharacters[i])
+        );
         if (!encode) {
             outputCharacters = inputCharacters.map((character) => {
-                if (character === ' ') {
-                    return character
+                if (character === " ") {
+                    return character;
                 } else {
                     for (alpha in cypher) {
                         if (cypher[alpha] === character) {
-                            return alpha
+                            return alpha;
                         }
                     }
                 }
-            })
+            });
         } else {
             outputCharacters = inputCharacters.map((character) => {
-                if (character === ' ') {
-                    return character
+                if (character === " ") {
+                    return character;
                 } else {
                     for (alpha in cypher) {
                         if (alpha === character) {
-                            return cypher[alpha]
+                            return cypher[alpha];
                         }
                     }
-                }   
-            })
+                }
+            });
         }
-        console.log(outputCharacters.join(''))
-        return outputCharacters.join('')
+        console.log(outputCharacters.join(""));
+        return outputCharacters.join("");
     }
     return {
         substitution,
-    }
-})()
+    };
+})();
 
-module.exports = substitutionModule.substitution
+module.exports = substitutionModule.substitution;
